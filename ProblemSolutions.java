@@ -104,7 +104,7 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
-        /* IDEAS: UNIONIZE ARRAYS AND SORT, THEN RETURN CONTENTS */
+        /* IDEAS: COMBINE ARRAYS AND SORT, THEN RETURN CONTENTS */
         // Create new array to contain array1 and array2
         int[] combinedArray = new int[array1.length + array2.length];
         // Copy elements from array1 to combinedArray
