@@ -68,7 +68,7 @@ class ProblemSolutions {
         */
         // COLLECTION.SORT() (QUICK SORT) (ASCENDING ORDER); COLLECTIONS.REVERSEORDER() (DESCENDING)
         // ADD YOUR CODE HERE
-        array.sort(array, Collections.reverseOrder()); // Sorting array in Descending
+        Arrays.sort(array, Collections.reverseOrder()); // Sorting array in Descending
         return array[k - 1]; // Returning kth element
         return 0;
     }
@@ -88,7 +88,8 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
-
+        /* IDEAS: UNIONIZE ARRAYS AND SORT, THEN PRINT CONTENTS 
+        PSEUDO CODE: array1.addAll(array2) */
         // ADD YOU CODE HERE
 
         return null;
