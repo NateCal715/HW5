@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   NATE CALDERON / SECTION 001
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -245,10 +245,20 @@ public class CuckooHash<K, V> {
 	 */
 
  	public void put(K key, V value) {
-
+		// PSEUDO CODE: EXPECTED TO PASS IF PAIR EXISTS
+		/* IF ([Key, Value] exists) {
+			return null; EXITING LOOP
+		}*/
 		// ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME AT TOP OF FILE.
 		// Also make sure you read this method's prologue above, it should help
 		// you. Especially the two HINTS in the prologue.
+		
+		// If bucket of specification already contains value
+		// Usage of Hash1(V) and Hash2(V) should be used to order pairs
+		// If still same bucket, rerun (and rehash)?
+		// Moving values from buckets can cause corruption
+		// We don't want the same pair passing thru the loop n times
+		// n can be infinite
 
 		return;
 	}
