@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   NATE CALDERON / SECTION 001
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -9,6 +9,7 @@
  ********************************************************************/
 
 import java.util.*;
+// import java.util.Collections;
 
 class ProblemSolutions {
 
@@ -31,7 +32,16 @@ class ProblemSolutions {
      */
 
     public boolean isSubset(int list1[], int list2[]) {
+        /* PSEUDO CODE: 
+        GIVEN INPUT list1[] {
+            CHECK IF list2[] IS CONTAINED IN list1[];
+            return TRUE;
+        } ELSE */
+        /* if (list2[i] < list1[i]) {
 
+        } ELSE */
+        // USAGE OF HASHTABLE: HashSet <Integer> = new HashSet<>();
+        
         // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
 
         return false;
@@ -45,16 +55,21 @@ class ProblemSolutions {
      * Example:
      *      Input: [1,7,3,10,34,5,8], 4
      *      Output: 7
-     *
+     * 
      * @param array - Array of integers
      * @param k     - the kth maximum element
      * @return      - the value in the array which is the kth maximum value
      */
 
     public int findKthLargest(int[] array, int k) {
-
+        /* PSEUDO CODE: ORDER ARRAY FROM GREATEST TO SMALLEST THEN LOCATE KTH ELEMENT
+            SORT ARRAY FROM GREATEST TO SMALLEST
+            RETURN [K - 1];
+        */
+        // COLLECTION.SORT() (QUICK SORT) (ASCENDING ORDER); COLLECTIONS.REVERSEORDER() (DESCENDING)
         // ADD YOUR CODE HERE
-
+        array.sort(array, Collections.reverseOrder()); // Sorting array in Descending
+        return array[k - 1]; // Returning kth element
         return 0;
     }
 
