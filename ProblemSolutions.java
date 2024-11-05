@@ -32,19 +32,25 @@ class ProblemSolutions {
      */
 
     public boolean isSubset(int list1[], int list2[]) {
-        /* PSEUDO CODE: 
+        /*  PSEUDO CODE: 
         GIVEN INPUT list1[] {
             CHECK IF list2[] IS CONTAINED IN list1[];
             return TRUE;
         } ELSE */
-        /* if (list2[i] < list1[i]) {
-
-        } ELSE */
         // USAGE OF HASHTABLE: HashSet <Integer> = new HashSet<>();
-        
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
-
-        return false;
+        HashSet <Integer> = new HashSet<>();
+        // Add elements in list1 to HashSet
+        for (int num : list1) {
+            set.add(num);
+        }
+        // Checking if elements in list2 are in HashSet
+        for (int num : list2) {
+            if (!set.contains(num)) {
+                return false; // If not return false
+            }
+        }
+        // Otherwise, return true
+        return true;
     }
 
 
@@ -62,15 +68,25 @@ class ProblemSolutions {
      */
 
     public int findKthLargest(int[] array, int k) {
-        /* PSEUDO CODE: ORDER ARRAY FROM GREATEST TO SMALLEST THEN LOCATE KTH ELEMENT
-            SORT ARRAY FROM GREATEST TO SMALLEST
-            RETURN [K - 1];
-        */
+        /* IDEAS: ORDER ARRAY FROM GREATEST TO SMALLEST THEN LOCATE KTH ELEMENT */
         // COLLECTION.SORT() (QUICK SORT) (ASCENDING ORDER); COLLECTIONS.REVERSEORDER() (DESCENDING)
-        // ADD YOUR CODE HERE
-        Arrays.sort(array, Collections.reverseOrder()); // Sorting array in Descending
-        return array[k - 1]; // Returning kth element
-        return 0;
+        /* Arrays.sort(array, Collections.reverseOrder()); // Sorting array in Descending
+        return array[k - 1]; // Returning kth element */
+        
+        // Create a min-heap with capacity k
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(k);
+        // Add elements from array into heap
+        for (int num : array) {
+            minHeap.add(num);
+            // if heap size > k, remove the smallest element
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+        // The kth element will be at the top of the heap
+        return minHeap.peek();
+
+        //return 0;
     }
 
 
@@ -88,11 +104,17 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
-        /* IDEAS: UNIONIZE ARRAYS AND SORT, THEN PRINT CONTENTS 
-        PSEUDO CODE: array1.addAll(array2) */
-        // ADD YOU CODE HERE
-
-        return null;
+        /* IDEAS: UNIONIZE ARRAYS AND SORT, THEN RETURN CONTENTS */
+        // Create new array to contain array1 and array2
+        int[] combinedArray = new int[array1.length + array2.length];
+        // Copy elements from array1 to combinedArray
+        System.arraycopy(array1, 0, combinedArray, 0, array1.length);
+        // Copy elements from array2 to combinedArray
+        System.arraycopy(array2, 0, combinedArray, array1.length, array2.length);
+        // Sort array
+        Arrays.sort(combinedArray);
+        // Return sorted Array
+        return combinedArray;
     }
 
 }
