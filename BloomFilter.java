@@ -216,9 +216,12 @@ class BloomFilter {
      */
 
     public boolean contains(String s) {
-        // Iterate thru k hash functions
-        for (int i = 0; i < k; i++) {
-            int hashIndex = hashFunction(s, i); // Using i-th hash func, calc hashIndex
+        // Iterate thru # of hash functions
+        for (int i = 0; i < noHashes; i++) {
+            // Use the hashCode method to get hash value
+            long hc = hashCode(s, i); 
+            // Calc hashIndex
+            int hashIndex = (int) (hc & this.hashMask); 
             // If any of the bits at the hashIndex are not set, return false
             if (!data.get(hashIndex)) {
                 return false;

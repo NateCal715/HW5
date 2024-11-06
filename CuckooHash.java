@@ -245,11 +245,6 @@ public class CuckooHash<K, V> {
 	 */
 
  	public void put(K key, V value) {
-		// PSEUDO CODE: EXPECTED TO PASS IF PAIR EXISTS
-		/* IF ([Key, Value] exists) {
-			return null; EXITING LOOP
-		}*/
-		
 		// If bucket of specification already contains pair
 		// Usage of Hash1(V) and Hash2(V) should be used to order pairs
 		// If still same bucket, grow map and rehash
@@ -262,27 +257,24 @@ public class CuckooHash<K, V> {
 
 		while (iterationCount < CAPACITY) {
 			// Initial pos at h1(key)
-			int pos1 = h1(currentKey);
+			int pos1 = hash1(currentKey);
 			// Check if bucket at pos1 is empty or has a dupe
-			if (table[pos1] == null || (table[pos1].key.equals(currentKey) && table[index1].value.equals(currentValue))) {
-				table[pos1] = new Entry<>(currentKey, currentValue);
+			if (table[pos1] == null || (table[pos1].getBucKey().equals(currentKey) && table[pos1].getValue().equals(currentValue))) {
+				table[pos1] = new Bucket<>(currentKey, currentValue);
 				return; // Insert worked, exit loop
 			}
 			// If bucket is occupied, remove element
-			Entry<K, V> displacedEntry = table[pos1];
-			table[pos1] = new Entry<>(currentKey, currentValue);
+			Bucket<K, V> displacedEntry = table[pos1];
+			table[pos1] = new Bucket<>(currentKey, currentValue);
 			// Move the displaced element to its alternate bucket using h2
-			currentKey = displacedEntry.key;
-			currentValue = displacedEntry.value;
-			int pos2 = h2(currentKey);
+			currentKey = displacedEntry.getBucKey();
+			currentValue = displacedEntry.getValue();
+			int pos2 = hash2(currentKey);
 			// Check if bucket at pos2 is empty or has a dupe
-			if (table[pos2] == null || (table[pos2].key.equals(currentKey) && table[pos2].value.equals(currentValue))) {
-				table[pos2] = new Entry<>(currentKey, currentValue);
+			if (table[pos2] == null || (table[pos2].getBucKey().equals(currentKey) && table[pos2].getValue().equals(currentValue))) {
+				table[pos2] = new Bucket<>(currentKey, currentValue);
 				return; // Insert worked, exit loop
 			}
-			// Set next displacedEntry to pos2 and continue
-			displacedEntry = table[pos2];
-			table[pos2] = new Entry<>(currentKey, currentValue);
 			// Increment the count and continue the loop
 			iterationCount++;
 		}
