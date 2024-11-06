@@ -249,18 +249,46 @@ public class CuckooHash<K, V> {
 		/* IF ([Key, Value] exists) {
 			return null; EXITING LOOP
 		}*/
-		// ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME AT TOP OF FILE.
-		// Also make sure you read this method's prologue above, it should help
-		// you. Especially the two HINTS in the prologue.
 		
-		// If bucket of specification already contains value
+		// If bucket of specification already contains pair
 		// Usage of Hash1(V) and Hash2(V) should be used to order pairs
-		// If still same bucket, rerun (and rehash)?
+		// If still same bucket, grow map and rehash
 		// Moving values from buckets can cause corruption
 		// We don't want the same pair passing thru the loop n times
 		// n can be infinite
+		K currentKey = key;
+		V currentValue = value;
+		int iterationCount = 0;
 
-		return;
+		while (iterationCount < CAPACITY) {
+			// Initial pos at h1(key)
+			int pos1 = h1(currentKey);
+			// Check if bucket at pos1 is empty or has a dupe
+			if (table[pos1] == null || (table[pos1].key.equals(currentKey) && table[index1].value.equals(currentValue))) {
+				table[pos1] = new Entry<>(currentKey, currentValue);
+				return; // Insert worked, exit loop
+			}
+			// If bucket is occupied, remove element
+			Entry<K, V> displacedEntry = table[pos1];
+			table[pos1] = new Entry<>(currentKey, currentValue);
+			// Move the displaced element to its alternate bucket using h2
+			currentKey = displacedEntry.key;
+			currentValue = displacedEntry.value;
+			int pos2 = h2(currentKey);
+			// Check if bucket at pos2 is empty or has a dupe
+			if (table[pos2] == null || (table[pos2].key.equals(currentKey) && table[pos2].value.equals(currentValue))) {
+				table[pos2] = new Entry<>(currentKey, currentValue);
+				return; // Insert worked, exit loop
+			}
+			// Set next displacedEntry to pos2 and continue
+			displacedEntry = table[pos2];
+			table[pos2] = new Entry<>(currentKey, currentValue);
+			// Increment the count and continue the loop
+			iterationCount++;
+		}
+		// In cycle repeats, rehash and reinsert last entry
+		rehash();
+		put(currentKey,currentValue); 
 	}
 
 
