@@ -38,7 +38,7 @@ class ProblemSolutions {
             return TRUE;
         } ELSE */
         // USAGE OF HASHTABLE: HashSet <Integer> = new HashSet<>();
-        HashSet <Integer> = new HashSet<>();
+        HashSet<Integer> set = new HashSet<>();
         // Add elements in list1 to HashSet
         for (int num : list1) {
             set.add(num);
